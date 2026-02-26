@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מפת הפקולטה לארכיטקטורה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #c9a96e;
+    --accent2: #8b5e3c;
+    --bg: #f7f4ef;
+    --light: #ede8e0;
+    --text: #2c2c2c;
+    --muted: #888;
+    --row1: #2d4a3e;
+    --row2: #3d5a6e;
+    --row3: #5a3d4a;
+    --row4: #4a4a2d;
+    --row5: #3d3d5a;
+    --year-header: #1a1a2e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    direction: rtl;
+    padding: 20px;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary);
+    color: white;
+    padding: 28px 40px;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .header-title {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .header-title span {
+    color: var(--accent);
+  }
+
+  .header-logo {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* === MAIN TABLE === */
+  .table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px;
+  }
+
+  /* Degree header row */
+  .degree-header-row th {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+    border-left: 2px solid rgba(255,255,255,0.15);
+    text-transform: uppercase;
+  }
+
+  .degree-header-row th:first-child {
+    background: transparent;
+    border: none;
+  }
+
+  .degree-bsc {
+    background: #243a5e;
+    color: #c9a96e;
+  }
+
+  .degree-mprof {
+    background: #3a2450;
+    color: #d4a8e0;
+  }
+
+  /* Year Headers */
+  .year-header-row th {
+    background: var(--year-header);
+    color: white;
+    padding: 14px 20px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+
+  .year-header-row th:first-child {
+    background: var(--accent);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    width: 130px;
+  }
+
+  .year-num {
+    display: block;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .year-header-row th:first-child .year-num {
+    color: var(--primary);
+  }
+
+  /* Category Label Column */
+  .cat-cell {
+    background: var(--primary);
+    color: white;
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    writing-mode: vertical-rl;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    width: 40px;
+  }
+
+  /* Section rows */
+  .section-row td {
+    vertical-align: top;
+    padding: 16px 18px;
+    border-left: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Category color bands */
+  .cat-academic .cat-cell { background: var(--row1); }
+  .cat-academic td { background: rgba(45,74,62,0.04); }
+  .cat-support .cat-cell { background: var(--row2); }
+  .cat-support td { background: rgba(61,90,110,0.04); }
+  .cat-social .cat-cell { background: var(--row3); }
+  .cat-social td { background: rgba(90,61,74,0.04); }
+  .cat-guidance .cat-cell { background: var(--row4); }
+  .cat-guidance td { background: rgba(74,74,45,0.04); }
+  .cat-career .cat-cell { background: var(--row5); }
+  .cat-career td { background: rgba(61,61,90,0.04); }
+  .cat-excellence .cat-cell { background: var(--accent2); }
+  .cat-excellence td { background: rgba(139,94,60,0.04); }
+
+  .year-header-row th.mprof-year {
+    background: #3a2450;
+  }
+  .year-header-row th.mprof-year .year-num {
+    color: #d4a8e0;
+  }
+
+  .cat-academic td.mprof-col { background: rgba(90,45,110,0.05); }
+  .cat-support td.mprof-col { background: rgba(90,45,110,0.05); }
+  .cat-social td.mprof-col { background: rgba(90,45,110,0.05); }
+  .cat-guidance td.mprof-col { background: rgba(90,45,110,0.05); }
+  .cat-career td.mprof-col { background: rgba(90,45,110,0.05); }
+  .cat-excellence td.mprof-col { background: rgba(90,45,110,0.05); }
+
+  .mprof-col .item-dot { background: #9b59b6 !important; }
+
+  /* Content items */
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+
+  .item:hover { background: rgba(0,0,0,0.04); }
+
+  .item:last-child { margin-bottom: 0; }
+
+  .item-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .cat-academic .item-dot { background: var(--row1); }
+  .cat-support .item-dot { background: var(--row2); }
+  .cat-social .item-dot { background: var(--row3); }
+  .cat-guidance .item-dot { background: var(--row4); }
+  .cat-career .item-dot { background: var(--row5); }
+  .cat-excellence .item-dot { background: var(--accent2); }
+
+  .item-text { flex: 1; font-size: 12.5px; }
+
+  .item-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  /* Excellence special row */
+  .excellence-cell {
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent2);
+    padding: 12px 16px !important;
+    border-left: 1px solid var(--light);
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 2px;
+  }
+
+  .tag.outline {
+    background: transparent;
+    border: 1.5px solid var(--accent2);
+    color: var(--accent2);
+  }
+
+  /* Footer info bar */
+  .info-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-right: 4px solid var(--accent);
+  }
+
+  .info-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .info-card-content {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .info-card-content a {
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  /* Print button */
+  .print-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 32px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+
+  .print-btn:hover { background: var(--accent2); }
+
+  @media print {
+    body { padding: 0; }
+    .print-btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<div class="header">
+  <div class="header-right">
+    <div class="header-subtitle">הטכניון – מכון טכנולוגי לישראל</div>
+    <div class="header-title">מעצבים את המחר <span>▸</span> מפת הפקולטה<br> <span>ארכיטקטורה ובינוי ערים</span></div>
+  </div>
+  <div class="header-logo">
+    ARCH<br>BFE
+  </div>
+</div>
+
+<!-- ============ MAIN TABLE ============ -->
+<div class="table-wrap">
+<table>
+
+  <!-- Degree headers -->
+  <thead>
+    <tr class="degree-header-row">
+      <th></th>
+      <th class="degree-bsc" colspan="4">🎓 תואר ראשון – B.Arch</th>
+      <th class="degree-mprof" colspan="2">🏛️ תואר שני מקצועי – M.Arch</th>
+    </tr>
+    <tr class="year-header-row">
+      <th>מידע<br>חשוב נוסף</th>
+      <th><span class="year-num">א׳</span>שנה א</th>
+      <th><span class="year-num">ב׳</span>שנה ב</th>
+      <th><span class="year-num">ג׳</span>שנה ג</th>
+      <th><span class="year-num">ד׳</span>שנה ד</th>
+      <th class="mprof-year"><span class="year-num">ה׳</span>שנה א׳ – מ.א</th>
+      <th class="mprof-year"><span class="year-num">ו׳</span>שנה ב׳ – מ.א</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <!-- ====== ACADEMIC ====== -->
+    <tr class="section-row cat-academic">
+      <td class="cat-cell" rowspan="1">אקדמי</td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">ברוכים הבאים! <a class="item-link" href="#">כל המידע לסטודנטים חדשים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פירוט מקצועות החובה בסמסטר הראשון – <a class="item-link" href="#">מדריך הרשמה למקצועות</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">תרשים מקצועות החובה והמגמות</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מבחני סיווג בכימיה / פיזיקה – <a class="item-link" href="#">קישור למבחני סיווג</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">לדרייב חומרי למידה</a> המנוהל על ידי סטודנטים</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">זה הזמן להירשם לקורסי מל״ג וספורט</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">תרשים מקצועות החובה והמגמות</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">יש להשלים קורסי בסיס לפני הרישום למעבדות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מתחילים קורסי מעבדות הוראה</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">לדרייב חומרי למידה</a> המנוהל ע״י הסטודנטים</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">זה הזמן להירשם לקורסי מל״ג וספורט</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">תרשים מקצועות החובה והמגמות</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">מדריכים למערכת משכ״ל</a> – הגשת בקשות, הרשמה לקורסים, ציונים</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">לדרייב חומרי למידה</a> המנוהל ע״י הסטודנטים</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">תרשים מקצועות החובה והמגמות</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">מדריכים למערכת משכ״ל</a> – הגשת בקשות, הרשמה לקורסים, ציונים</span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">קורסי חובה לתואר מקצועי – <a class="item-link" href="#">תרשים מסלול התואר</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">הרשמה לסטודיו עיצוב מתקדם</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">מדריכים למערכת משכ״ל</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">פרויקט גמר מקצועי – <a class="item-link" href="#">הנחיות והגשה</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">קורסי בחירה ומסלול התמחות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">מדריכים למערכת משכ״ל</a></span></div>
+      </td>
+    </tr>
+    <tr class="section-row cat-support">
+      <td class="cat-cell">מעטפת אקדמית</td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">דף מידע לסטודנטים בשנה א׳</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">חונכי ׳נחיתה רכה׳ עומדים לרשותך בכל שאלה</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מומלץ להירשם לתכניות פק״ל של אס״ט</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית לקבוצות אוכלוסיה שונות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מומלץ להירשם לתכניות פק״ל של אס״ט</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית לסטודנטים חדשים לתואר מקצועי</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה אקדמית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+    </tr>
+
+    <!-- ====== SOCIAL ====== -->
+    <tr class="section-row cat-social">
+      <td class="cat-cell">מעטפת חברתית</td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">הכירו את <a class="item-link" href="#">אס״ט</a> – אגודת הסטודנטים בטכניון</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פעילות התנדבותית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a> / התנדבות דרך אס״ט</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פעילות התנדבותית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a> / דרך אס״ט</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פעילות התנדבותית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a> / דרך אס״ט</span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פעילות התנדבותית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">עדכונים על אירועים פקולטיים ברשתות החברתיות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פעילות התנדבותית – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+      </td>
+    </tr>
+
+    <!-- ====== GUIDANCE ====== -->
+    <tr class="section-row cat-guidance">
+      <td class="cat-cell">ייעוץ ותמיכה</td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">המרכז לייעוץ ותמיכה בסטודנטים – מרכז חוסן</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">מרכז חוסן</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">מרכז חוסן</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">מרכז חוסן</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">מרכז חוסן</a></span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">סיוע כלכלי ומלגות – <a class="item-link" href="#">אתר דיקן הסטודנטים</a></span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">תמיכה רגשית: <a class="item-link" href="#">מרכז חוסן</a></span></div>
+      </td>
+    </tr>
+
+    <!-- ====== CAREER ====== -->
+    <tr class="section-row cat-career">
+      <td class="cat-cell">ניסיון תעסוקתי</td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עבודה במעבדות הפקולטה – לפרטים פנו לחבר/ת הסגל</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text"><a class="item-link" href="#">מידע נוסף על אפשרויות תעסוקה</a></span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">עבודה במעבדות הפקולטה – לפרטים פנו לחבר/ת הסגל</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">יריד תעסוקה פקולטי – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מפגש חשיפה למחקר – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">חשיפה לפרויקט יזמות והשתתפות בתחרויות בינלאומיות</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">יריד תעסוקה פקולטי – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סדנאות הכשרה (לינקדין, כתיבת קו״ח)</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">מפגש חשיפה למחקר – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">הזדמנות להתנסות בפרויקט גמר במעבדות הפקולטה</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">חשיפה לפרויקט יזמות והשתתפות בתחרויות בינלאומיות</span></div>
+      </td>
+
+      <td>
+        <div class="item"><span class="item-dot"></span><span class="item-text">סמינרים לתארים מתקדמים – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">פרויקט גמר במעבדות הפקולטה</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">יום חשיפה לתארים מתקדמים – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">חשיפה לפרויקט יזמות והשתתפות בתחרויות בינלאומיות</span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">יריד תעסוקה פקולטי – מוזמנים!</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">שיתופי פעולה עם משרדי אדריכלות</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">חשיפה לפרויקטי יזמות ותחרויות בינלאומיות</span></div>
+      </td>
+      <td class="mprof-col">
+        <div class="item"><span class="item-dot"></span><span class="item-text">הגשת פרויקט גמר מקצועי</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">ימי עיון מקצועיים ותערוכות בוגרים</span></div>
+        <div class="item"><span class="item-dot"></span><span class="item-text">יצירת קשרים עם מעסיקים בתעשייה</span></div>
+      </td>
+    </tr>
+
+    <!-- ====== EXCELLENCE ====== -->
+    <tr class="section-row cat-excellence">
+      <td class="cat-cell">תכנית מצטיינים</td>
+      <td class="excellence-cell"><span class="tag">תכנית המצטיינים</span><br><br><span class="tag outline">תכנית ״מרחיבים אופקים״</span></td>
+      <td class="excellence-cell"><span class="tag">תכנית המצטיינים</span><br><br><span class="tag outline">תכנית ״מרחיבים אופקים״</span></td>
+      <td class="excellence-cell"><span class="tag">תכנית המצטיינים</span><br><br><span class="tag outline">יזמות והרחבת אופקים</span></td>
+      <td class="excellence-cell"><span class="tag">תכנית המצטיינים</span><br><br><span class="tag outline">תכנית ״מרחיבים אופקים״</span></td>
+      <td class="excellence-cell mprof-col"><span class="tag outline">מסלול מצטיינים לתואר מקצועי</span></td>
+      <td class="excellence-cell mprof-col"><span class="tag outline">מסלול מצטיינים לתואר מקצועי</span></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<!-- ============ INFO CARDS ============ -->
+<div class="info-bar">
+  <div class="info-card">
+    <div class="info-card-title">אתר הפקולטה</div>
+    <div class="info-card-content"><a href="#">פקולטה לארכיטקטורה ובינוי ערים</a></div>
+  </div>
+  <div class="info-card">
+    <div class="info-card-title">כרטיס סטודנט – אס״ט</div>
+    <div class="info-card-content">מזמינים באזור האישי ואוספים ביריד פתיחת שנה</div>
+  </div>
+  <div class="info-card">
+    <div class="info-card-title">תקלות טכניות</div>
+    <div class="info-card-content">073-3785600 (ווטסאפ)<br>אפשר גם לפתוח פניה באתר</div>
+  </div>
+  <div class="info-card">
+    <div class="info-card-title">לשאלות נוספות</div>
+    <div class="info-card-content">פנו לרכזת לימודי הסמכה<br><a href="mailto:arch@technion.ac.il">arch@technion.ac.il</a></div>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ הדפסה / שמירה כ-PDF</button>
+
+</body>
+</html>
